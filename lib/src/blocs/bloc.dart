@@ -25,5 +25,3 @@ class Bloc extends Object with Validators {
   }
   //endregion
 }
-
-final bloc = Bloc();
