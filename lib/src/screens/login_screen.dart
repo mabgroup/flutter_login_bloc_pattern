@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:toast/toast.dart';
 import '../blocs/bloc.dart';
 import '../blocs/provider.dart';
+
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -15,7 +17,7 @@ class LoginScreen extends StatelessWidget {
           Container(
             margin: EdgeInsets.all(10.0),
           ),
-          submitButton(),
+          submitButton(bloc),
         ],
       ),
     );
@@ -45,9 +47,8 @@ class LoginScreen extends StatelessWidget {
         return TextField(
           onChanged: bloc.changePassword,
           obscureText: true,
-          decoration:
-              InputDecoration(
-                hintText: '8-10 lenght', 
+          decoration: InputDecoration(
+              hintText: '8-10 lenght',
               labelText: 'Password',
               errorText: snapshot.error),
         );
@@ -55,11 +56,20 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget submitButton() {
-    return RaisedButton(
-      onPressed: () {},
-      color: Colors.blue,
-      child: Text('Login'),
+  Widget submitButton(Bloc bloc) {
+    return StreamBuilder(
+      stream: bloc.SubmitValid,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        return RaisedButton(
+          onPressed: !snapshot.hasData
+              ? null
+              : () {
+                Toast.show("همه دیتا درست است!",context , duration: Toast.LENGTH_SHORT, gravity:  Toast.CENTER);
+                },
+          color: Colors.blue,
+          child: Text('Login'),
+        );
+      },
     );
   }
 }
