@@ -65,6 +65,7 @@ class LoginScreen extends StatelessWidget {
               ? null
               : () {
                 Toast.show("همه دیتا درست است!",context , duration: Toast.LENGTH_SHORT, gravity:  Toast.CENTER);
+                bloc.submit();
                 },
           color: Colors.blue,
           child: Text('Login'),

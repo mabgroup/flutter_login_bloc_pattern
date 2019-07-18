@@ -3,13 +3,20 @@ import 'validators.dart';
 import 'package:rxdart/rxdart.dart';
 
 class Bloc extends Object with Validators {
-  final _emailController = StreamController<String>.broadcast();
-  final _passwordController = StreamController<String>.broadcast();
+  final _emailController = BehaviorSubject<String>();
+  final _passwordController = BehaviorSubject<String>();
 
   //region add data to stream
   Function(String) get changeEmail => _emailController.sink.add;
 
   Function(String) get changePassword => _passwordController.sink.add;
+
+  submit(){
+    final validemai = _emailController.value;
+    final validPassword = _passwordController.value;
+
+    print('$validemai & $validPassword');
+  }
 
   //endregion
 
