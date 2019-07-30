@@ -11,11 +11,13 @@ class Bloc extends Object with Validators {
 
   Function(String) get changePassword => _passwordController.sink.add;
 
-  submit(){
+  String submit(){
     final validemai = _emailController.value;
     final validPassword = _passwordController.value;
 
     print('$validemai & $validPassword');
+
+    return '$validemai & $validPassword';
   }
 
   //endregion
